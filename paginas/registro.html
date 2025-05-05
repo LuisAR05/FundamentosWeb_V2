@@ -3,11 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Proyecto Final</title>
 </head>
 <body>
-    <button></button>
-    <input type="text">
-    <select name="" id=""></select>
+    <header>
+        <h1>REGISTRO</h1>
+        <p>En esta vista podras realizar el registro de un nuevo producto. Completa los campos solicitados</p>
+    </header>
+    <main>
+        <section>
+            <form>
+                <div>
+                    <label for="nombre">Digite su nombre:</label><br>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <nav>
+                    <div>
+                        <label for="categoria">Categoria</label><br>
+                        <select name="categoria" id="categoria">
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="media-alta">Media-Alta</option>
+                            <option value="alta">Alta</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="capacidad">Capacidad</label><br>
+                        <select name="capacidad" id="capacidad">
+                            <option value="dos">2</option>
+                            <option value="cuatro">4</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="imagen">Imagen</label><br>
+                        <select name="imagen" id="imagen">
+                            <option value="imagen1"></option>
+                            <option value="imagen2"></option>
+                            <option value="imagen3"></option>
+                            <option value="imagen4"></option>
+                            <option value="imagen5"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="marca">Marca</label><br>
+                        <select name="marca" id="marca">
+                            <option value="chevrolet">Chevrolet</option>
+                            <option value="mazda">Mazda</option>
+                            <option value="tesla">Tesla</option>
+                            <option value="mercedesbenz">Mercedes Benz</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="lamborghini">Lamborghini</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="codigo">Codigo de producto</label><br>
+                        <input type="text" id="codigo" name="codigo">
+                        <label for="precio">Precio</label><br>
+                        <input type="number" id="precio" name="precio">
+                    </div>
+                    <div>
+                        <button onclick="registrar()">REGISTRAR</button>
+                        <button onclick="limpiar()">LIMPIAR</button>
+                    </div>
+                </nav>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Fundamentos Web</p>
+        <p>Luis David Angel Rincon &copy; 2025</p>
+    </footer>
+    <script src="../js/productos.js"></script>
 </body>
 </html>
