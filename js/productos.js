@@ -5,7 +5,8 @@ const vehiculos = [
         marca: "Chevrolet", 
         img: "../img/spark.jpg", 
         categoria: "Baja", 
-        capacidad: "4", precioXDia: 150000
+        capacidad: "4",
+        precioXDia: 150000
     },
     {
         codigo: "kL9m1N0p", 
@@ -449,3 +450,460 @@ const vehiculos = [
         precioXDia: 4000000
     },
 ];
+
+//VISTA REGISTRO
+const img = [
+    {
+        src: "../img/488.jpeg",
+        alt: "Ferrari 488"
+    },
+    {
+        src: "../img/911.jpg",
+        alt: "Porsche 911"
+    },
+    {
+        src: "../img/cx90.jpg",
+        alt: "Mazda CX-90"
+    },
+    {
+        src: "../img/eqs.jpg",
+        alt: "Mercedes Benz EQS"
+    },
+    {
+        src: "../img/models.jpg",
+        alt: "Tesla Model S"
+    },
+    {
+        src: "../img/onix.jpeg",
+        alt: "Chevrolet Onix"
+    },
+    {
+        src: "../img/tecnica.jpg",
+        alt: "Lamborghini Tecnica"
+    },
+    {
+        src: "../img/sanderors.jpeg",
+        alt: "Renault Sandero RS"
+    },
+    {
+        src: "../img/typer.jpg",
+        alt: "Honda Civic Type R"
+    },
+    {
+        src: "../img/challenger.jpg",
+        alt: "Dodge Challenger"
+    }
+];
+const imagen = document.getElementById("imagen");
+if (imagen) {
+    const imgPreview = document.getElementById("img");
+    imagen.addEventListener("change", function () {
+        const seleccionado = imagen.value;
+        let imgData = null;
+        for (let i = 0; i < img.length; i++) {
+            if (img[i].alt === seleccionado) {
+                imgData = img[i];
+                break;
+            }
+        }
+        if (imgData && imgPreview) {
+            imgPreview.innerHTML = "<img src='" + imgData.src + "' alt='" + imgData.alt + "' class='imgSeleccionada' />";
+        } else if (imgPreview) {
+            imgPreview.innerHTML = "";
+        }
+    });
+}
+function verificar() {
+    const nombre = document.getElementById("nombre");
+    const categoria = document.getElementById("categoria");
+    const imagen = document.getElementById("imagen");
+    const capacidad = document.getElementById("capacidad");
+    const marca = document.getElementById("marca");
+    const codigo = document.getElementById("codigo");
+    const precio = document.getElementById("precio");
+
+    if (nombre.value === "" || categoria.value === "" || imagen.value === "" || capacidad.value === "" || marca.value === "" || codigo.value === "" || precio.value === "") {
+        window.location.href = "./indicaciones.html";
+        alert("Faltan datos");
+        console.log("Faltan datos");
+        return true;
+    } else if(nombre.value.length > 20) {
+        window.location.href = "./indicaciones.html";
+        alert("El nombre no puede ser mayor a 20 caracteres");
+        console.log("El nombre no es muy largo");
+        return true;
+    } else if (existeCodigoEnLocalStorage(codigo.value)) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo ya existe");
+        console.log("El codigo ya existe");
+        return true;
+    } else if (codigo.value.length <= 8) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo no es correcto por la longitud");
+        console.log("El codigo no es correcto por la longitud");
+        return true;
+    } else if (!/[0-9].*[0-9]/.test(codigo.value)) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo no es correcto por los numeros");
+        console.log("El codigo no es correcto por los numeros");
+        return true;
+    } else if (!/[a-z]/.test(codigo.value)) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo no es correcto por las letras minusculas");
+        console.log("El codigo no es correcto por las letras minusculas");
+        return true;
+    } else if (!/[A-Z]/.test(codigo.value)) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo no es correcto por las letras mayusculas");
+        console.log("El codigo no es correcto por las letras mayusculas");
+        return true;
+    } else if (precio.value < 10000 || precio.value > 30000000) {
+        window.location.href = "./indicaciones.html";
+        alert("El precio no es correcto");
+        console.log("El precio no es correcto");
+        return true;
+    } else if (existeCodigo(codigo.value)) {
+        window.location.href = "./indicaciones.html";
+        alert("El codigo ya existe");
+        console.log("El codigo ya existe");
+        return true;
+    } 
+}
+function existeCodigo(codigo) {
+    for (let i = 0; i < vehiculos.length; i++) {
+        if (vehiculos[i].codigo === codigo) {
+            return true;
+        }
+    }
+    return false;
+}
+function existeCodigoEnLocalStorage(codigo) {
+    const vehiculosRegistrados = JSON.parse(localStorage.getItem("vehiculoN")) || [];
+    for (let i = 0; i < vehiculosRegistrados.length; i++) {
+        if (vehiculosRegistrados[i].codigo === codigo) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const KEY_LOCAL_STORAGE = "vehiculoN";
+function guardarDatos(key, data) {
+    const dataSring = JSON.stringify(data);
+    localStorage.setItem(key, dataSring);
+}
+
+let vehiculoN = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE)) || [];
+const registrar = (event) => {
+    event.preventDefault();
+
+    if (verificar()) {
+        return;
+    } else{
+        let rutaImagen = "";
+        for (let i = 0; i < img.length; i++) {
+            if (img[i].alt === imagen.value) {
+                rutaImagen = img[i].src;
+                break;
+            }
+        }
+        const nuevoVehiculo = {
+            codigo: codigo.value,
+            nombre: nombre.value,
+            marca: marca.value,
+            img: rutaImagen,
+            categoria: categoria.value,
+            capacidad: capacidad.value,
+            precioXDia: precio.value
+        };
+        vehiculoN.push(nuevoVehiculo);
+            guardarDatos(KEY_LOCAL_STORAGE, vehiculoN);
+            window.location.href = "./productos.html";
+            console.log("Datos completos");
+    }
+};
+
+const vehiculosRegistrados = JSON.parse(localStorage.getItem("vehiculoN"));
+console.log(vehiculosRegistrados);
+const limpiar = () => {
+    nombre.innerHTML = "";
+    categoria.innerHTML = "";
+    imagen.innerHTML = "";
+    capacidad.innerHTML = "";
+    marca.innerHTML = "";
+    codigo.innerHTML = "";
+    precio.innerHTML = "";
+    vehiculoN.length = 0;
+    localStorage.removeItem("vehiculoN");
+}
+
+
+//VISTA INDICACIONES
+function volverR() {
+    window.location.href = "./registro.html";
+}
+
+
+//VISTA PRODUCTOS
+let paginaActual = 1;
+const productosPorPagina = 15;
+const productos = document.getElementById("productos");
+
+function mostrarVehiculosPaginados() {
+    if (!productos) return;
+    productos.innerHTML = "";
+    const vehiculosRegistrados = JSON.parse(localStorage.getItem("vehiculoN"));
+    const todos = vehiculos.concat(vehiculosRegistrados);
+    console.log(todos);
+
+    const inicio = (paginaActual - 1) * productosPorPagina;
+    const fin = inicio + productosPorPagina;
+    const totalPaginas = Math.ceil(todos.length / productosPorPagina);
+
+    for (let i = inicio; i < fin && i < todos.length; i++) {
+        const vehiculo = todos[i];
+        const precioFormateado = Number(vehiculo.precioXDia || vehiculo.precio).toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+        productos.innerHTML += "<div class='card'><div class='face front'><img src='" + vehiculo.img + "' alt='" + vehiculo.nombre + "' /><h3>" + vehiculo.nombre + "</h3></div><div class='face back'><p>Nombre: " + vehiculo.nombre + "</p><p>Categoria: " + vehiculo.categoria + "</p><p>Codigo: " + vehiculo.codigo + "</p><p>Capacidad: " + vehiculo.capacidad + "</p><p>Marca: " + vehiculo.marca + "</p><p>Precio por dia: " + precioFormateado + "</p></div></div>";
+    }
+    document.querySelector('button[onclick="paginaAnterior()"]').disabled = paginaActual === 1;
+    document.querySelector('button[onclick="siguientePagina()"]').disabled = paginaActual === totalPaginas;
+    const paginaActualSpan = document.getElementById("paginaActual");
+    if (paginaActualSpan) {
+        paginaActualSpan.textContent = "Página " + paginaActual + " de " + totalPaginas;
+    }
+}
+function paginaAnterior() {
+    if (paginaActual > 1) {
+        paginaActual--;
+        mostrarVehiculosPaginados();
+    }
+}
+function siguientePagina() {
+    const totalPaginas = Math.ceil(vehiculos.length / productosPorPagina);
+    if (paginaActual < totalPaginas) {
+        paginaActual++;
+        mostrarVehiculosPaginados();
+    }
+}
+if (productos) {
+    mostrarVehiculosPaginados();
+};
+function buscar(){
+    window.location.href = "./buscar.html";
+}
+
+
+//VISTA BUSCAR
+const precios = document.getElementById("precios");
+const capacidades = document.getElementById("capacidades");
+const categorias = document.getElementById("categorias");
+const vehiculosFiltrados = [];
+const KEY_VEHICULOS_FILTRADOS = "vehiculosFiltradosData";
+
+const retraso = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (precios.value === "" && capacidades.value === "" && categorias.value === "") {
+                reject(alert("No se han seleccionado filtros"));
+            } else {
+                filtrar();
+                resolve();
+            }
+        }, 2000);
+    });
+};
+/*const filtrar = () => {
+    vehiculosFiltrados.length = 0;
+    const todos = vehiculos.concat(vehiculosRegistrados);
+    if(precios.value === "primerOP"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].precioXDia < 200000) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(precios.value === "segundoOP"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].precioXDia <= 500000 && todos[i].precioXDia >= 200000) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(precios.value === "tercerOP"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].precioXDia <= 1000000 && todos[i].precioXDia >= 500000) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(precios.value === "cuartoOP"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].precioXDia >= 1000000) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(capacidades.value === "dos"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].capacidad == 2) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(capacidades.value === "cuatro"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].capacidad == 4) {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(categorias.value === "baja"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].categoria == "Baja") {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(categorias.value === "media"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].categoria == "Media") {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(categorias.value === "media-alta"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].categoria == "Media-Alta") {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(categorias.value === "alta"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].categoria == "Alta") {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+    if(categorias.value === "luxury"){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].categoria == "Luxury") {
+                vehiculosFiltrados.push(todos[i]);
+            }
+        }
+    }
+}*/
+const filtrar = () => {
+    let resultadoTemporal = vehiculos.concat(vehiculosRegistrados);
+
+    if (precios.value === "primerOP") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.precioXDia < 200000);
+    } else if (precios.value === "segundaOP") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.precioXDia >= 200000 && vehiculo.precioXDia <= 500000);
+    } else if (precios.value === "terceraOP") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.precioXDia >= 500000 && vehiculo.precioXDia <= 1000000);
+    } else if (precios.value === "cuartaOP") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.precioXDia >= 1000000);
+    }
+
+    if (capacidades.value === "dos") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.capacidad == 2);
+    } else if (capacidades.value === "cuatro") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.capacidad == 4);
+    }
+
+    if (categorias.value === "baja") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.categoria === "Baja");
+    } else if (categorias.value === "media") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.categoria === "Media");
+    } else if (categorias.value === "media-alta") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.categoria === "Media-Alta");
+    } else if (categorias.value === "alta") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.categoria === "Alta");
+    } else if (categorias.value === "luxury") {
+        resultadoTemporal = resultadoTemporal.filter(vehiculo => vehiculo.categoria === "Luxury");
+    }
+
+    vehiculosFiltrados.length = 0;
+    for (let i = 0; i < resultadoTemporal.length; i++) {
+        vehiculosFiltrados.push(resultadoTemporal[i]);
+    }
+};
+const buscarF = () => {
+    retraso()
+        .then(() => {
+            guardarDatos(KEY_VEHICULOS_FILTRADOS, vehiculosFiltrados);
+            console.log(vehiculosFiltrados);
+            window.location.href = "./lista.html";
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+const limpiarF = () => {
+    precios.value = "";
+    capacidades.value = "";
+    categorias.value = "";
+    localStorage.removeItem(KEY_VEHICULOS_FILTRADOS);
+}
+const volverB = () => {
+    window.location.href = "./productos.html";
+}
+
+
+//VISTA LISTA
+const resultados = document.getElementById("resultados");
+const paginacion = document.getElementById("paginacion");
+let paginaActualLista = 1;
+const elementosPorPagina = 10;
+
+function mostrarVehiculosFiltrados(pagina = 1) {
+    const vehiculosFiltrados = JSON.parse(localStorage.getItem("vehiculosFiltradosData")) || [];
+    resultados.innerHTML = "";
+
+    if (vehiculosFiltrados.length === 0) {
+        resultados.innerHTML = "<p>No se encontraron vehículos con esos filtros.</p>";
+        if (paginacion) paginacion.innerHTML = "";
+        return;
+    }
+
+    const totalPaginas = Math.ceil(vehiculosFiltrados.length / elementosPorPagina);
+    const inicio = (pagina - 1) * elementosPorPagina;
+    const fin = Math.min(inicio + elementosPorPagina, vehiculosFiltrados.length);
+
+    let tabla = "<table class='tabla-lista'><thead><tr><th>Imagen</th><th>Nombre</th><th>Categoria</th><th>Codigo</th><th>Capacidad</th><th>Marca</th><th>Precio por día</th></tr></thead><tbody>";
+
+    for (let i = inicio; i < fin; i++) {
+        const vehiculo = vehiculosFiltrados[i];
+        const precioFormateado = Number(vehiculo.precioXDia || vehiculo.precio).toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+        tabla += "<tr><td><img src='" + vehiculo.img + "' alt='" + vehiculo.nombre + "' class='imgTa'></td><td>" + vehiculo.nombre + "</td><td>" + vehiculo.categoria + "</td><td>" + vehiculo.codigo + "</td><td>" + vehiculo.capacidad + "</td><td>" + vehiculo.marca + "</td><td>" + precioFormateado + "</td></tr>";
+    }
+    tabla += "</tbody></table>";
+    resultados.innerHTML = tabla;
+
+    if (paginacion) {
+        paginacion.innerHTML = "";
+        if (totalPaginas > 1) {
+            if (pagina > 1) {
+                paginacion.innerHTML += "<button onclick='mostrarVehiculosFiltrados(" + (pagina - 1) + ")' class='btnL' ><</button>";
+            }
+            paginacion.innerHTML += "  Página " + pagina + " de " + totalPaginas + "  ";
+            if (pagina < totalPaginas) {
+                paginacion.innerHTML += "<button onclick='mostrarVehiculosFiltrados(" + (pagina + 1) + ")' class='btnL'>></button>";
+            }
+        }
+    }
+}
+if (resultados) {
+    mostrarVehiculosFiltrados();
+}
+const limpiarB = () => {
+    if (precios || capacidades || categorias) {
+        precios.value = "";
+        capacidades.value = "";
+        categorias.value = "";
+        vehiculosFiltrados.length = 0;
+        localStorage.removeItem(KEY_VEHICULOS_FILTRADOS);
+    }
+    window.location.href = "./buscar.html";
+}

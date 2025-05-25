@@ -4,74 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <title>Proyecto Final</title>
 </head>
 <body>
     <header>
         <h1>REGISTRO</h1>
-        <p>En esta vista podras realizar el registro de un nuevo producto. Completa los campos solicitados</p>
+        <p class="pR">En esta vista podras realizar el registro de un nuevo producto. Completa los campos solicitados</p>
     </header>
-    <main>
-        <section>
+    <main class="mainR">
+        <section class="sectionR">
             <form>
-                <div>
-                    <label for="nombre">Digite su nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre">
+                <div class="nombre">
+                    <label for="nombre">Digite su nombre</label><br>
+                    <input type="text" id="nombre" name="nombre" class="labelT" placeholder="Nombre">
                 </div>
-                <nav>
+                <nav class="navR">
                     <div>
                         <label for="categoria">Categoria</label><br>
                         <select name="categoria" id="categoria">
-                            <option value="baja">Baja</option>
-                            <option value="media">Media</option>
-                            <option value="media-alta">Media-Alta</option>
-                            <option value="alta">Alta</option>
-                            <option value="luxury">Luxury</option>
+                            <option value="" disabled selected>Seleccione una opcion</option>
+                            <option value="Baja">Baja</option>
+                            <option value="Media">Media</option>
+                            <option value="Media-alta">Media-Alta</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Luxury">Luxury</option>
                         </select>
                     </div>
                     <div>
                         <label for="capacidad">Capacidad</label><br>
                         <select name="capacidad" id="capacidad">
-                            <option value="dos">2</option>
-                            <option value="cuatro">4</option>
+                            <option value="" disabled selected>Seleccione una opcion</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
                         </select>
                     </div>
                     <div>
-                        <label for="imagen">Imagen</label><br>
-                        <select name="imagen" id="imagen">
-                            <option value="imagen1"></option>
-                            <option value="imagen2"></option>
-                            <option value="imagen3"></option>
-                            <option value="imagen4"></option>
-                            <option value="imagen5"></option>
-                        </select>
+                            <label for="imagen" class="limagen">Imagen</label><br>
+                            <select name="imagen" id="imagen">
+                                <option value="" disabled selected>Seleccione una opcion</option>
+                                <option value="Ferrari 488">Ferrari 488</option>
+                                <option value="Porsche 911">Porsche 911</option>
+                                <option value="Mazda CX-90">Mazda CX-90</option>
+                                <option value="Mercedes Benz EQS">Mercedes Benz EQS</option>
+                                <option value="Tesla Model S">Tesla Model S</option>
+                                <option value="Chevrolet Onix">Chevrolet Onix</option>
+                                <option value="Lamborghini Tecnica">Lamborghini Tecnica</option>
+                                <option value="Dodge Challenger">Dodge Challenger</option>
+                                <option value="Renault Sandero RS">Renault Sandero RS</option>
+                                <option value="Honda Civic Type R">Honda Civic Type R</option>
+                            </select>
                     </div>
                     <div>
                         <label for="marca">Marca</label><br>
                         <select name="marca" id="marca">
-                            <option value="chevrolet">Chevrolet</option>
-                            <option value="mazda">Mazda</option>
-                            <option value="tesla">Tesla</option>
-                            <option value="mercedesbenz">Mercedes Benz</option>
-                            <option value="ferrari">Ferrari</option>
-                            <option value="lamborghini">Lamborghini</option>
+                            <option value="" disabled selected>Seleccione una opcion</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="Tesla">Tesla</option>
+                            <option value="Mercedesbenz">Mercedes Benz</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Dodge">Dodge</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Renault">Renault</option>
                         </select>
                     </div>
+                </nav>
+                <div id="img"></div>
+                <div class="codiPrecio">
                     <div>
                         <label for="codigo">Codigo de producto</label><br>
-                        <input type="text" id="codigo" name="codigo">
-                        <label for="precio">Precio</label><br>
-                        <input type="number" id="precio" name="precio">
+                        <input type="text" id="codigo" name="codigo" class="labelT" placeholder="Codigo de producto">
                     </div>
                     <div>
-                        <button onclick="registrar()">REGISTRAR</button>
-                        <button onclick="limpiar()">LIMPIAR</button>
+                        <label for="precio">Precio</label><br>
+                        <input type="number" id="precio" name="precio" class="labelT" placeholder="Precio en pesos">
                     </div>
-                </nav>
+                </div>
+                <div class="botones">
+                    <button onclick="registrar(event)" class="btnverde">REGISTRAR</button>
+                    <button onclick="limpiar()" class="btnazul">LIMPIAR</button>
+                </div>
             </form>
         </section>
     </main>
-    <footer>
+    <footer class="footerC">
         <p>Fundamentos Web</p>
         <p>Luis David Angel Rincon &copy; 2025</p>
     </footer>
