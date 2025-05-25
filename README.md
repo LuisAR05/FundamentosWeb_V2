@@ -22,3 +22,10 @@ En estre proyecto encontraras el codigo html, css y js de una renta de vehiculos
     - Selectores.
 - Tablas y formularios basicos.
 - Uso de procesos asincronos con Promesas.
+
+## LINEA DE DESARROLLO:
+Alquiler de vehiculos.
+
+## VISTAS DEL SISTEMA:
+- VISTA REGISTRO
+![Vista Registro](./img/Captura%20de%20pantalla%202025-05-25%20122348.png)
