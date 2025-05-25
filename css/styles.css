@@ -1,13 +1,13 @@
 html, body {
-    margin: 0; /* Resetear los márgenes por defecto del body */
-    padding: 0; /* Resetear los paddings por defecto del body */
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; /* O center si quieres centrar horizontalmente */
+    align-items: center;
     justify-content: space-between;
     background-image: url('../img/pavel-keyzik-2dQwVCV9pcI-unsplash.jpg');
     background-size: cover;
@@ -24,15 +24,15 @@ header{
     padding-left: 10px;
     margin-top: 5px;
     box-sizing: border-box;
-    height: auto; /* Dejar que la altura se ajuste al contenido */
+    height: auto;
 }
-header h1 { /* Asumiendo que "REGISTRO" es un h1 */
-    margin-top: 0.5em; /* Reducir el margen superior del título */
-    margin-bottom: 0.2em; /* Reducir el margen inferior del título */
+header h1 {
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
 }
-header p { /* Asumiendo que el texto es un párrafo */
-    margin-top: 0.2em; /* Reducir el margen superior del texto */
-    margin-bottom: 0.5em; /* Reducir el margen inferior del texto */
+header p {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
 }
 
 

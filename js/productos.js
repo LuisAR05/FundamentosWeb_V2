@@ -512,7 +512,7 @@ if (imagen) {
             imgPreview.innerHTML = "";
         }
     });
-}
+};
 function verificar() {
     const nombre = document.getElementById("nombre");
     const categoria = document.getElementById("categoria");
@@ -537,7 +537,7 @@ function verificar() {
         alert("El codigo ya existe");
         console.log("El codigo ya existe");
         return true;
-    } else if (codigo.value.length <= 8) {
+    } else if (codigo.value.length < 8) {
         window.location.href = "./indicaciones.html";
         alert("El codigo no es correcto por la longitud");
         console.log("El codigo no es correcto por la longitud");
@@ -568,7 +568,7 @@ function verificar() {
         console.log("El codigo ya existe");
         return true;
     } 
-}
+};
 function existeCodigo(codigo) {
     for (let i = 0; i < vehiculos.length; i++) {
         if (vehiculos[i].codigo === codigo) {
@@ -576,7 +576,7 @@ function existeCodigo(codigo) {
         }
     }
     return false;
-}
+};
 function existeCodigoEnLocalStorage(codigo) {
     const vehiculosRegistrados = JSON.parse(localStorage.getItem("vehiculoN")) || [];
     for (let i = 0; i < vehiculosRegistrados.length; i++) {
@@ -585,13 +585,13 @@ function existeCodigoEnLocalStorage(codigo) {
         }
     }
     return false;
-}
+};
 
 const KEY_LOCAL_STORAGE = "vehiculoN";
 function guardarDatos(key, data) {
     const dataSring = JSON.stringify(data);
     localStorage.setItem(key, dataSring);
-}
+};
 
 let vehiculoN = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE)) || [];
 const registrar = (event) => {
@@ -635,13 +635,13 @@ const limpiar = () => {
     precio.innerHTML = "";
     vehiculoN.length = 0;
     localStorage.removeItem("vehiculoN");
-}
+};
 
 
 //VISTA INDICACIONES
 function volverR() {
     window.location.href = "./registro.html";
-}
+};
 
 
 //VISTA PRODUCTOS
@@ -669,9 +669,9 @@ function mostrarVehiculosPaginados() {
     document.querySelector('button[onclick="siguientePagina()"]').disabled = paginaActual === totalPaginas;
     const paginaActualSpan = document.getElementById("paginaActual");
     if (paginaActualSpan) {
-        paginaActualSpan.textContent = "Página " + paginaActual + " de " + totalPaginas;
+        paginaActualSpan.textContent = "Pagina " + paginaActual + " de " + totalPaginas;
     }
-}
+};
 function paginaAnterior() {
     if (paginaActual > 1) {
         paginaActual--;
@@ -862,7 +862,7 @@ function mostrarVehiculosFiltrados(pagina = 1) {
     resultados.innerHTML = "";
 
     if (vehiculosFiltrados.length === 0) {
-        resultados.innerHTML = "<p>No se encontraron vehículos con esos filtros.</p>";
+        resultados.innerHTML = "<p>No se encontraron vehiculos con esos filtros.</p>";
         if (paginacion) paginacion.innerHTML = "";
         return;
     }
@@ -871,7 +871,7 @@ function mostrarVehiculosFiltrados(pagina = 1) {
     const inicio = (pagina - 1) * elementosPorPagina;
     const fin = Math.min(inicio + elementosPorPagina, vehiculosFiltrados.length);
 
-    let tabla = "<table class='tabla-lista'><thead><tr><th>Imagen</th><th>Nombre</th><th>Categoria</th><th>Codigo</th><th>Capacidad</th><th>Marca</th><th>Precio por día</th></tr></thead><tbody>";
+    let tabla = "<table class='tabla-lista'><thead><tr><th>Imagen</th><th>Nombre</th><th>Categoria</th><th>Codigo</th><th>Capacidad</th><th>Marca</th><th>Precio por dia</th></tr></thead><tbody>";
 
     for (let i = inicio; i < fin; i++) {
         const vehiculo = vehiculosFiltrados[i];
@@ -906,4 +906,7 @@ const limpiarB = () => {
         localStorage.removeItem(KEY_VEHICULOS_FILTRADOS);
     }
     window.location.href = "./buscar.html";
+}
+function volverResul () {
+    window.location.href = "./productos.html";
 }
