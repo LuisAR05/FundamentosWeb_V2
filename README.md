@@ -29,3 +29,17 @@ Alquiler de vehiculos.
 ## VISTAS DEL SISTEMA:
 - VISTA REGISTRO
 ![Vista Registro](./img/Captura%20de%20pantalla%202025-05-25%20122348.png)
+
+- VISTA INDICACIONES
+![Vista Indicaciones](./img/Captura%20de%20pantalla%202025-05-25%20122430.png)
+![Vista Indicaciones](./img/Captura%20de%20pantalla%202025-05-25%20122454.png)
+
+- VISTA PRODUCTOS
+![Vista Productos](./img/Captura%20de%20pantalla%202025-05-25%20122612.png)
+![Vista Productos](./img/Captura%20de%20pantalla%202025-05-25%20122633.png)
+
+- VISTA BUSCAR
+![Vista Buscar](./img/Captura%20de%20pantalla%202025-05-25%20122708.png)
+
+- VISTA RESULTADOS
+![Vista Resultados](./img/Captura%20de%20pantalla%202025-05-25%20122815.png)
